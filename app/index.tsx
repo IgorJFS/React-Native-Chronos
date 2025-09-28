@@ -1,17 +1,18 @@
-import { useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { Image, StyleSheet, View } from "react-native";
 import ActionButton from "./components/ActionButton";
 import FokusButton from "./components/FokusButton";
 import Footer from "./components/Footer";
+import Timer from "./components/Timer";
 
-type Pomodoro = {
+export type Pomodoro = {
   id: string;
   duration: number;
   image: any;
   display: string;
 };
 
-const pomodoro: Pomodoro[] = [
+export const pomodoro: Pomodoro[] = [
   {
     id: "focus",
     duration: 25,
@@ -33,7 +34,81 @@ const pomodoro: Pomodoro[] = [
 ];
 
 export default function Index() {
+  const timerRef: any = useRef(null);
   const [timerType, setTimerType] = useState(pomodoro[0]);
+  const [timeRemaining, setTimeRemaining] = useState(pomodoro[0].duration * 60); // in seconds
+  const [isRunning, setIsRunning] = useState(false);
+  const [focusSessionCount, setFocusSessionCount] = useState(0);
+
+  // Reset timer when timer type changes
+  useEffect(() => {
+    setTimeRemaining(timerType.duration * 60);
+    if (isRunning) {
+      setIsRunning(false);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    }
+  }, [timerType]);
+
+  // Handle timer countdown
+  useEffect(() => {
+    if (isRunning && timeRemaining > 0) {
+      timerRef.current = setInterval(() => {
+        setTimeRemaining((prev) => {
+          if (prev <= 1) {
+            // Timer completed
+            setIsRunning(false);
+            handleTimerComplete();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [isRunning, timeRemaining]);
+
+  const handleTimerComplete = () => {
+    if (timerType.id === "focus") {
+      const newCount = focusSessionCount + 1;
+      setFocusSessionCount(newCount);
+      // After 4 focus sessions, take a long break
+      if (newCount % 4 === 0) {
+        setTimerType(pomodoro[2]); // Long break
+      } else {
+        setTimerType(pomodoro[1]); // Short break
+      }
+    } else {
+      // After any break, go back to focus
+      setTimerType(pomodoro[0]);
+    }
+  };
+
+  const toggleTimer = () => {
+    if (timeRemaining === 0) {
+      // Reset timer if it's at 0
+      setTimeRemaining(timerType.duration * 60);
+    }
+    setIsRunning(!isRunning);
+  };
+
+  const handleTimerTypeChange = (newTimerType: Pomodoro) => {
+    setTimerType(newTimerType);
+  };
+
   return (
     <View style={styles.container}>
       <Image source={timerType.image} />
@@ -44,17 +119,16 @@ export default function Index() {
               key={p.id}
               active={p}
               timerType={timerType}
-              setTimerType={setTimerType}
+              setTimerType={handleTimerTypeChange}
             />
           ))}
         </View>
-        <Text style={styles.timer}>
-          {new Date(timerType.duration * 60000).toLocaleTimeString("en-US", {
-            minute: "2-digit",
-            second: "2-digit",
-          })}
-        </Text>
-        <FokusButton />
+        <Timer timeRemaining={timeRemaining} />
+        <FokusButton
+          isPlaying={isRunning}
+          onPress={toggleTimer}
+          title={isRunning ? "Pause" : timeRemaining === 0 ? "Reset" : "Start"}
+        />
       </View>
       <Footer />
     </View>
@@ -77,12 +151,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#144480",
     gap: 32,
-  },
-  timer: {
-    fontSize: 54,
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#fff",
   },
   context: {
     flexDirection: "row",

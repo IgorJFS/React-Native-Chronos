@@ -7,7 +7,7 @@ export default function Footer() {
         Made with 💜 by IgorJFS - Alura Project
       </Text>
       <Text style={styles.footerText}>
-        &copy; IgorJFS - Alura Project {year}
+        &copy; IgorJFS - Chronos Pomodoro {year}
       </Text>
     </View>
   );

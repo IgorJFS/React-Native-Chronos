@@ -1,11 +1,19 @@
-import { Play } from "lucide-react-native";
 import { Pressable, StyleSheet, Text } from "react-native";
+import { IconPause, IconPlay } from "../Icons";
 
-export default function FokusButton() {
+export default function FokusButton({
+  onPress,
+  title,
+  isPlaying,
+}: {
+  onPress: () => void;
+  title: string;
+  isPlaying: boolean;
+}) {
   return (
-    <Pressable style={styles.button}>
+    <Pressable style={styles.button} onPress={onPress}>
       <Text style={styles.buttonText}>
-        <Play size={16} /> Start
+        {isPlaying ? <IconPause /> : <IconPlay />} {title}
       </Text>
     </Pressable>
   );
