@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "fokus",
-    "slug": "fokus",
+    "slug": "chronos-pomodoro-rn",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/favicon-2.png",
@@ -43,6 +43,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "3e977d94-d924-49b7-86dd-aedefd2d301e"
+      }
+    },
+    "owner": "igorjfs"
   }
 }
