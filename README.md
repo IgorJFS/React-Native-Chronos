@@ -1,6 +1,6 @@
 # Pomodoro App
 
-A simple project introducing React Native development, part of a course for those who already master the fundamentals of ReactJS. During the course, we gradually developed a Pomodoro app.
+A pomodoro mobile app, extending the Chronos Pomodoro web app, now built with React Native.
 
 ## 🔨 Project Features
 
@@ -52,7 +52,7 @@ After downloading the project, follow the steps below to run it:
 
 # Pomodoro App (Versão em Português)
 
-Um projeto simples para introdução ao desenvolvimento com React Native, parte do curso voltado para quem já domina os fundamentos de ReactJS. Durante o curso, desenvolvemos gradualmente um app de Pomodoro.
+Um aplicativo mobile Pomodoro, extensão do aplicativo web Chronos Pomodoro, agora construído com React Native.
 
 ## 🔨 Funcionalidades do projeto
 
