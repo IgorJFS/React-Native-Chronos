@@ -8,7 +8,8 @@ A simple project introducing React Native development, part of a course for thos
 - Animated countdown timer with options to start and pause.
 - Interactive icons for timer control.
 
-![](assets/preview.gif)
+<!-- Replaced image tag -->
+<img src="assets/preview.gif" alt="Preview" width="300" />
 
 ## ✔️ Technologies and Techniques Used
 
@@ -24,7 +25,8 @@ The project development involves the following technologies and techniques:
 
 ## Project Preview (Scan the QR code with your phone)
 
-![Live Demo](assets/QRCODE.png)
+<!-- Replaced QR code tag -->
+<img src="assets/QRCODE.png" alt="Live Demo QR Code" width="150" />
 
 ## 🛠️ How to Run the Project
 
@@ -58,7 +60,8 @@ Um projeto simples para introdução ao desenvolvimento com React Native, parte 
 - Contador regressivo animado com opções de iniciar e pausar.
 - Exibição de ícones interativos para controle do temporizador.
 
-![](assets/preview.gif)
+<!-- Replaced image tag -->
+<img src="assets/preview.gif" alt="Preview" width="300" />
 
 ## ✔️ Técnicas e tecnologias utilizadas
 
@@ -74,7 +77,8 @@ O desenvolvimento do projeto envolve as seguintes tecnologias e técnicas:
 
 ## Preview do projeto (Use seu celular para escanear o QR code)
 
-![Live Demo](assets/QRCODE.png)
+<!-- Replaced QR code tag -->
+<img src="assets/QRCODE.png" alt="Live Demo QR Code" width="150" />
 
 ## 🛠️ Abrir e rodar o projeto
 
